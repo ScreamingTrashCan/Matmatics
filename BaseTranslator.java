@@ -38,6 +38,8 @@ public class BaseTranslator {
     // ------------------------
     public void calculate()
     {
+        
+
         if (inputBase >= 2 && inputBase <= 36 && outputBase >=2 && outputBase <= 36)
         {
             base10Number = Normalize(input, inputBase);
