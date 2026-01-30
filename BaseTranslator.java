@@ -8,7 +8,6 @@ public class BaseTranslator {
     // Intialize Characters
     public Character[] letters = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
 
-
     private String input;
     private String output;
 
@@ -38,31 +37,34 @@ public class BaseTranslator {
     // ------------------------
     public void calculate()
     {
-        
-
+        // If the input base is within range of 2 - 36
         if (inputBase >= 2 && inputBase <= 36 && outputBase >=2 && outputBase <= 36)
         {
             base10Number = Normalize(input, inputBase);
+            // If the number is valid (is positive, contains correct characters, and characters are within scope)
             if (!base10Number.equals(BigInteger.valueOf(-999)) && !base10Number.equals(BigInteger.valueOf(-1)) && !base10Number.equals(BigInteger.valueOf(-67)))
             {
-
             AddDigitValues(base10Number, outputBase);
             AmountOfDigits(base10Number);
 
             output = FinalizeString(base10Number);
             }
+            // Non-valid character used
             else if (base10Number.equals(BigInteger.valueOf(-999)))
             {
                 output = "Error! Not a valid character.";
             }
+            // Used a negative number
             else if (base10Number.equals(BigInteger.valueOf(-1)))
             {
                 output = "Error! Cannot be a negative number.";
             }
+            // Used a character outside of scope
             else if (base10Number.equals(BigInteger.valueOf(-67)))
             {
                 output = "Error! Used a character with a higher value than the input base.";
             }
+            // Other errors
             else
             {
                 output = "Error! Something went wrong :(";
@@ -84,6 +86,7 @@ public class BaseTranslator {
     // ------------------------
     public Long BaseTenValue(char c)
     {
+        // Ensure it uses valid characters
         if (c == '-')
         {
             return -1L;
@@ -92,6 +95,7 @@ public class BaseTranslator {
         {
             return -999L;
         }
+        // Returns a Long Value equal to the Base 10 Value of a Character (ex. 0 is 0, 1 is 1... A is 10, B is 11, etc.)
             for (int i = 0; i < letters.length; i++)
             {
                 if (letters[i] == c)
@@ -107,6 +111,7 @@ public class BaseTranslator {
     // ------------------------
     String FinalizeString(BigInteger input)
     {
+        // Combine all characters into a string
         String out = "";
         for(int i = digitAmounts.size() -1; i >= 0; i--)
         {
@@ -117,6 +122,7 @@ public class BaseTranslator {
 
     void AmountOfDigits(BigInteger input)
     {
+        // Determines the amount of digits that the output will have
         BigInteger number = input;
         for(int i = digitValues.size() - 1; i >= 0; i--)
         {
@@ -130,12 +136,14 @@ public class BaseTranslator {
 
     BigInteger Normalize(String input, int inBase)
     {
+        // Turns the input into a normalized Base 10 BigInteger
         BigInteger out = BigInteger.ZERO;
         int length = input.length();
         for(int i = length - 1; i >= 0; i--)
         {
             int pow = length -i -1;
             long num = BaseTenValue(input.charAt(i));
+            // Ensures the input is valid
             if(num == -999)
             {
                 return BigInteger.valueOf(-999);
@@ -157,6 +165,7 @@ public class BaseTranslator {
 
     void AddDigitValues(BigInteger num, int baseInt)
     {
+        // The "amount" of each digit there are in the normalized number (ex. 145 contains one 100, four 10s, and five 1s)
         digitValues = new ArrayList<>();
         digitAmounts = new ArrayList<>();
         BigInteger current = BigInteger.ZERO;

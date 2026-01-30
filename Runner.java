@@ -6,6 +6,9 @@ public class Runner {
         BaseTranslateMenu();
     }
 
+    // ------------------------
+    // In-terminal Base Translator
+    // ------------------------
     public static void BaseTranslateMenu()
     {
         BaseTranslator bT = new BaseTranslator();
