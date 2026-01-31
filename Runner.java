@@ -3,17 +3,43 @@ import java.util.Scanner;
 public class Runner {
     
     public static void main(String[] args) {
-        BaseTranslateMenu();
+        Scanner s = new Scanner(System.in);
+        MainMenu(s);
+    }
+
+    // ------------------------
+    // Main Menu
+    // ------------------------
+    public static void MainMenu(Scanner s)
+    {
+        System.out.println("CHOOSE A COMMAND: \n>calculator \n>basetranslator \n>exit");
+
+        String sLine = s.nextLine();
+
+        while(!sLine.equals("exit"))
+        {
+            switch(sLine)
+            {
+                case "basetranslator":
+                    BaseTranslateMenu(s);
+                default:
+                    System.out.println("Unknown command.");
+                    break;
+            }
+            System.out.println("CHOOSE A COMMAND: \n>calculator \n>basetranslator \n>exit");
+            sLine = s.nextLine();
+        }
+        
+        
+        s.close();
     }
 
     // ------------------------
     // In-terminal Base Translator
     // ------------------------
-    public static void BaseTranslateMenu()
+    public static void BaseTranslateMenu(Scanner s)
     {
         BaseTranslator bT = new BaseTranslator();
-
-        Scanner s = new Scanner(System.in);
 
         System.out.println("BASE TRANSLATOR INPUT COMMAND: \n>calculate \n>set \n>info \n>exit");
 
@@ -72,8 +98,8 @@ public class Runner {
 
             sLine = s.nextLine();
         }
-
-        s.close();
+        
+        MainMenu(s);
     }
 
 }
