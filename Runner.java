@@ -124,8 +124,6 @@ public class Runner {
         frame.setVisible(true);
         frame.toFront();
         frame.requestFocus();
-
-        System.exit(0);
     }
 
     // ------------------------
