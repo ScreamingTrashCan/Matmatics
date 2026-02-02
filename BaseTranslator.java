@@ -171,7 +171,7 @@ public class BaseTranslator {
         BigInteger current = BigInteger.ZERO;
         for(int i = 0; current.compareTo(num) <= 0; i++)
         {
-            current = BigInteger.valueOf((int)Math.pow(baseInt, i));
+            current = BigInteger.valueOf((long)Math.pow(baseInt, i));
             if(current.compareTo(num) <= 0)
             {
                 digitValues.add(current);
