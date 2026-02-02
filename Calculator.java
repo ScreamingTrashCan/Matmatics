@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.IntToDoubleFunction;
 
 public class Calculator {
     
@@ -9,6 +8,7 @@ public class Calculator {
 
     private List<String> inputSegments;
 
+    // Initialize Calculator Object
     public Calculator()
     {
         input = "";
@@ -19,13 +19,15 @@ public class Calculator {
     // ------------------------
     public double Calculate()
     {
+        // Initialize operations and ints list
         inputSegments = splitInputs();
         List<String> operations =  new ArrayList<>();
         List<Double> ints = new ArrayList<>();
+        // Add all numbers to ints list
         for (String in : inputSegments) {
             try
             {
-                ints.add(Double.valueOf(Double.parseDouble(in)));
+                ints.add(Double.parseDouble(in));
             }
             catch (Exception e)
             {
@@ -33,14 +35,17 @@ public class Calculator {
             }
         }
 
+        // Combine and calculate until no operations left
         while(!operations.isEmpty())
         {
+        // Order of operation - M & D
         if(operations.contains("*") || operations.contains("/"))
         {
             for(int i = 0; i < operations.size(); i++)
             {
                 if(operations.get(i).equals("*"))
                 {
+                    // Combine and multiply numbers to left and right of *
                     operations.remove(i);
                     double num = ints.get(i) * ints.get(i + 1);
                     ints.remove(i); ints.remove(i);
@@ -49,6 +54,7 @@ public class Calculator {
                 }
                 else if(operations.get(i).equals("/"))
                 {
+                    // Combine and divide numbers to left and right of /
                     operations.remove(i);
                     double num = ints.get(i) / ints.get(i + 1);
                     ints.remove(i); ints.remove(i);
@@ -57,12 +63,14 @@ public class Calculator {
                 }
             }
         }
+        // Order of operation - A & S
         else if(operations.contains("+") || operations.contains("-"))
         {
             for(int i = 0; i < operations.size(); i++)
             {
                 if(operations.get(i).equals("+"))
                 {
+                    // Combine and add numbers to left and right of +
                     operations.remove(i);
                     double num = ints.get(i) + ints.get(i + 1);
                     ints.remove(i); ints.remove(i);
@@ -71,6 +79,7 @@ public class Calculator {
                 }
                 else if(operations.get(i).equals("-"))
                 {
+                    // Combine and add numbers to left and right of -
                     operations.remove(i);
                     double num = ints.get(i) - ints.get(i + 1);
                     ints.remove(i); ints.remove(i);
@@ -79,10 +88,8 @@ public class Calculator {
                 }
             }
         }
-
         }
 
-        //Debug
         return ints.get(0);
     }
 
@@ -91,6 +98,7 @@ public class Calculator {
     // ------------------------
     private List<String> splitInputs()
     {
+        // Split input into operations and numbers
         Character[] equations = new Character[] { '+', '-', '*', '/' };
         List<String> segs = new ArrayList<>();
         String toAdd = "";
@@ -98,15 +106,19 @@ public class Calculator {
         {
             if(Arrays.asList(equations).contains(input.charAt(i)))
             {
+                // Add current number
                 segs.add(toAdd);
+                // Add operation
                 toAdd = "";
                 segs.add(Character.toString(input.charAt(i)));
             }
             else
             {
+                // Store current digit
                 toAdd += input.charAt(i);
             }
         }
+        // Add final number
         segs.add(toAdd);
         return segs;
     }
