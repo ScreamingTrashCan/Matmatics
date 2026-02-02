@@ -21,4 +21,4 @@ Install all files within one folder, then use the built-in Run tool in Visual St
 
 ## Authors
 @ScreamingTrashCan
-@WyattThompson-MTCHS
+@Wyatt-Thompson
