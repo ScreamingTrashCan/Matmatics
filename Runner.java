@@ -14,7 +14,6 @@ public class Runner {
     // ------------------------
     public static void MainMenu(Scanner s)
     {
-<<<<<<< HEAD
         String sLine;
 
         do
@@ -78,9 +77,7 @@ public class Runner {
         Calculator calc = new Calculator();
 
         System.out.println("CALCULATOR INPUT COMMAND: \n>calculate \n>exit");
-=======
         System.out.println("CHOOSE A COMMAND: \n>calculator \n>basetranslator \n>exit");
->>>>>>> guistuff
 
         String sLine = s.nextLine();
 
@@ -88,7 +85,6 @@ public class Runner {
         {
             switch(sLine)
             {
-<<<<<<< HEAD
                 case "calculate":
                     System.out.println("    Note - Write it in Base 10, no spaces, and only +,-,*,/,^");
                     System.out.println("    Input your equation:");
@@ -96,15 +92,12 @@ public class Runner {
                     calc.setInput(sLine);
                     System.out.println("|| OUTPUT: " + calc.Calculate() + " ||");
                     break;
-=======
                 case "basetranslator":
                     BaseTranslatorTerminal(s);
->>>>>>> guistuff
                 default:
                     System.out.println("Unknown command.");
                     break;
             }
-<<<<<<< HEAD
 
             System.out.println("CALCULATOR INPUT COMMAND: \n>calculate \n>exit");
 
@@ -131,16 +124,8 @@ public class Runner {
         frame.setVisible(true);
         frame.toFront();
         frame.requestFocus();
-=======
-            System.out.println("CHOOSE A COMMAND: \n>calculator \n>basetranslator \n>exit");
-            sLine = s.nextLine();
-        }
-        
-        
-        s.close();
 
         System.exit(0);
->>>>>>> guistuff
     }
 
     // ------------------------

@@ -1,7 +1,5 @@
-<<<<<<< HEAD
 import java.awt.CardLayout;
 import java.awt.Dimension;
-=======
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -10,19 +8,10 @@ import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
 import java.io.File;
 import java.io.IOException;
->>>>>>> guistuff
 
 import javax.swing.*;
 
 public class BaseTranslatorGUI extends JPanel {
-<<<<<<< HEAD
-    public BaseTranslatorGUI()
-    {
-        this.setPreferredSize(new Dimension(1920, 1080));
-        this.setLayout(new CardLayout());
-    }
-}
-=======
     private Font saira;
     private Font sairaBold;
     
@@ -69,4 +58,3 @@ public class BaseTranslatorGUI extends JPanel {
         }
     }
 }
->>>>>>> guistuff
