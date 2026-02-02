@@ -1,14 +1,8 @@
-import java.awt.Dimension;
 import java.util.Scanner;
-
-import javax.swing.JFrame;
 
 public class Runner {
     
     public static void main(String[] args) {
-<<<<<<< Updated upstream
-        BaseTranslateMenu();
-=======
         Scanner s = new Scanner(System.in);
         MainMenu(s);
     }
@@ -18,93 +12,38 @@ public class Runner {
     // ------------------------
     public static void MainMenu(Scanner s)
     {
-        String sLine;
+        System.out.println("CHOOSE A COMMAND: \n>calculator \n>basetranslator \n>exit");
 
-        do
+        String sLine = s.nextLine();
+
+        while(!sLine.equals("exit"))
         {
-            System.out.println("CHOOSE A COMMAND: \n>calculator \n>basetranslator \n>exit \n");
-
-            sLine = s.nextLine();
-
-            System.out.println();
-
             switch(sLine)
             {
                 case "basetranslator":
-                    do
-                    {
-                        System.out.println("CHOOSE A TYPE: \n>gui \n>terminal \n>back \n");
-
-                        sLine = s.nextLine();
-
-                        System.out.println();
-
-                        switch(sLine)
-                        {
-                            case "gui":
-                                setup();
-                                MainMenu(s);
-                                break;
-                            case "terminal":
-                                BaseTranslatorTerminal(s);
-                                MainMenu(s);
-                                break;
-                            case "back":
-                                System.out.println("Returning to main menu...\n");
-                                MainMenu(s);
-                                break;
-                            default:
-                                System.out.println("Unknown command.\n");
-                        }
-                    } while(!sLine.equals("back"));
-                case "exit":
-                    System.out.println("Exiting program...\n");
-                    break;
+                    BaseTranslateMenu(s);
                 default:
-                    System.out.println("Unknown command.\n");
+                    System.out.println("Unknown command.");
                     break;
             }
-        } while(!sLine.equals("exit"));
+            System.out.println("CHOOSE A COMMAND: \n>calculator \n>basetranslator \n>exit");
+            sLine = s.nextLine();
+        }
+        
         
         s.close();
-
-        System.exit(0);
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
     }
 
     // ------------------------
     // In-terminal Base Translator
     // ------------------------
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    public static void BaseTranslateMenu()
+    public static void BaseTranslateMenu(Scanner s)
     {
         BaseTranslator bT = new BaseTranslator();
-
-        Scanner s = new Scanner(System.in);
 
         System.out.println("BASE TRANSLATOR INPUT COMMAND: \n>calculate \n>set \n>info \n>exit");
-=======
-    public static void BaseTranslatorTerminal(Scanner s)
-    {
-        BaseTranslator bT = new BaseTranslator();
-
-        System.out.println("BASE TRANSLATOR INPUT COMMAND: \n>calculate \n>set \n>info \n>exit \n");
->>>>>>> Stashed changes
-=======
-    public static void BaseTranslatorTerminal(Scanner s)
-    {
-        BaseTranslator bT = new BaseTranslator();
-
-        System.out.println("BASE TRANSLATOR INPUT COMMAND: \n>calculate \n>set \n>info \n>exit \n");
->>>>>>> Stashed changes
 
         String sLine = s.nextLine();
-
-        System.out.println();
 
         while(!sLine.equals("exit"))
         {
@@ -115,11 +54,12 @@ public class Runner {
                     System.out.println("|| OUTPUT: " + bT.getOutput() + " ||");
                     break;
                 case "set":
-                    System.out.println("   What would you like to change? \n   >input \n   >output \n   >inbase \n   >outbase   \n");
+                    System.out.println("   What would you like to change? \n   >input \n   >output \n   >inbase \n   >outbase");
                     sLine = s.nextLine();
                     System.out.println("      Choose value:");
                     switch(sLine)
                     {
+    
                         case "input":
                             bT.setInput(s.nextLine());
                             break;
@@ -143,44 +83,23 @@ public class Runner {
                             }
                             break;
                         default:
-                            System.out.println("Unknown command.\n");
+                            System.out.println("Unknown command.");
                     }
                     break;
                 case "info":
                     System.out.println(bT.toString());
                     break;
                 default:
-                    System.out.println("Unknown command.\n");
+                    System.out.println("Unknown command.");
                     break;
             }
 
             System.out.println("INPUT COMMAND: \n>calculate \n>set\n>info \n>exit");
 
             sLine = s.nextLine();
-
-            System.out.println();
         }
-
-        s.close();
+        
+        MainMenu(s);
     }
 
-    // ------------------------
-    // Instantiates GUI
-    // ------------------------
-
-    public static void setup()
-    {
-        JFrame frame = new JFrame("Matmatics Base Translator");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        frame.setUndecorated(false);
-        frame.setSize(new Dimension(1920, 1080));
-
-        BaseTranslatorGUI panel = new BaseTranslatorGUI();
-        frame.add(panel);
-
-        frame.setVisible(true);
-        frame.toFront();
-        frame.requestFocus();
-    }
 }
