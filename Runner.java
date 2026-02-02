@@ -69,12 +69,16 @@ public class Runner {
         s.close();
 
         System.exit(0);
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     }
 
     // ------------------------
     // In-terminal Base Translator
     // ------------------------
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
     public static void BaseTranslateMenu()
     {
@@ -83,6 +87,13 @@ public class Runner {
         Scanner s = new Scanner(System.in);
 
         System.out.println("BASE TRANSLATOR INPUT COMMAND: \n>calculate \n>set \n>info \n>exit");
+=======
+    public static void BaseTranslatorTerminal(Scanner s)
+    {
+        BaseTranslator bT = new BaseTranslator();
+
+        System.out.println("BASE TRANSLATOR INPUT COMMAND: \n>calculate \n>set \n>info \n>exit \n");
+>>>>>>> Stashed changes
 =======
     public static void BaseTranslatorTerminal(Scanner s)
     {
