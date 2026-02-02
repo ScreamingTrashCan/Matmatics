@@ -21,7 +21,7 @@ public class Runner {
             switch(sLine)
             {
                 case "basetranslator":
-                    BaseTranslatorMenu(s);
+                    BaseTranslatorTerminal(s);
                 default:
                     System.out.println("Unknown command.");
                     break;
