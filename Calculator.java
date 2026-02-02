@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.IntToDoubleFunction;
 
 public class Calculator {
     
@@ -16,15 +17,15 @@ public class Calculator {
     // ------------------------
     // Calculate
     // ------------------------
-    public int Calculate()
+    public double Calculate()
     {
         inputSegments = splitInputs();
         List<String> operations =  new ArrayList<>();
-        List<Integer> ints = new ArrayList<>();
+        List<Double> ints = new ArrayList<>();
         for (String in : inputSegments) {
             try
             {
-                ints.add(Integer.valueOf(Integer.parseInt(in)));
+                ints.add(Double.valueOf(Double.parseDouble(in)));
             }
             catch (Exception e)
             {
@@ -41,7 +42,7 @@ public class Calculator {
                 if(operations.get(i).equals("*"))
                 {
                     operations.remove(i);
-                    Integer num = ints.get(i) * ints.get(i + 1);
+                    double num = ints.get(i) * ints.get(i + 1);
                     ints.remove(i); ints.remove(i);
                     ints.add(i, num);
                     break;
@@ -49,7 +50,7 @@ public class Calculator {
                 else if(operations.get(i).equals("/"))
                 {
                     operations.remove(i);
-                    Integer num = ints.get(i) / ints.get(i + 1);
+                    double num = ints.get(i) / ints.get(i + 1);
                     ints.remove(i); ints.remove(i);
                     ints.add(i, num);
                     break;
@@ -63,7 +64,7 @@ public class Calculator {
                 if(operations.get(i).equals("+"))
                 {
                     operations.remove(i);
-                    Integer num = ints.get(i) + ints.get(i + 1);
+                    double num = ints.get(i) + ints.get(i + 1);
                     ints.remove(i); ints.remove(i);
                     ints.add(i, num);
                     break;
@@ -71,7 +72,7 @@ public class Calculator {
                 else if(operations.get(i).equals("-"))
                 {
                     operations.remove(i);
-                    Integer num = ints.get(i) - ints.get(i + 1);
+                    double num = ints.get(i) - ints.get(i + 1);
                     ints.remove(i); ints.remove(i);
                     ints.add(i, num);
                     break;
