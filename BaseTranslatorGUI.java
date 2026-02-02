@@ -2,6 +2,6 @@ import javax.swing.*;
 
 public class BaseTranslatorGUI {
     
-    // Hello Earl'd 2
+    // test
 
 }
