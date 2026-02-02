@@ -85,7 +85,7 @@ public class Runner {
             switch(sLine)
             {
                 case "calculate":
-                    System.out.println("    Note - Write it in Base 10, no spaces, and only +,-,*,/");
+                    System.out.println("    Note - Write it in Base 10, no spaces, and only +,-,*,/,^");
                     System.out.println("    Input your equation:");
                     sLine = s.nextLine();
                     calc.setInput(sLine);

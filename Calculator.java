@@ -38,8 +38,24 @@ public class Calculator {
         // Combine and calculate until no operations left
         while(!operations.isEmpty())
         {
-        // Order of operation - M & D
-        if(operations.contains("*") || operations.contains("/"))
+        // Order of operation - Exponent
+        if(operations.contains("^"))
+        {
+            for(int i = 0; i < operations.size(); i++)
+            {
+                if(operations.get(i).equals("^"))
+                {
+                    // Combine and exponentiate numbers to left and right of ^
+                    operations.remove(i);
+                    double num = Math.pow(ints.get(i), ints.get(i + 1));
+                    ints.remove(i); ints.remove(i);
+                    ints.add(i, num);
+                    break;
+                }
+            }
+        }
+        // Order of operations - M & D
+        else if(operations.contains("*") || operations.contains("/"))
         {
             for(int i = 0; i < operations.size(); i++)
             {
@@ -99,7 +115,7 @@ public class Calculator {
     private List<String> splitInputs()
     {
         // Split input into operations and numbers
-        Character[] equations = new Character[] { '+', '-', '*', '/' };
+        Character[] equations = new Character[] { '+', '-', '*', '/', '^' };
         List<String> segs = new ArrayList<>();
         String toAdd = "";
         for(int i = 0; i < input.length(); i++)
