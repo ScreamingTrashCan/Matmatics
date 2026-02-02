@@ -15,10 +15,10 @@ public class BaseTranslator {
     private int outputBase;
 
 
-    public BigInteger base10Number;
+    private BigInteger base10Number;
 
-    public List<BigInteger> digitValues;
-    public List<Integer> digitAmounts;
+    private List<BigInteger> digitValues;
+    private List<Integer> digitAmounts;
 
     // ------------------------
     // Create Base Translator

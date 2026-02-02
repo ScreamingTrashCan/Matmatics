@@ -20,6 +20,8 @@ public class Runner {
         {
             switch(sLine)
             {
+                case "calculator":
+                    CalculateMenu(s);
                 case "basetranslator":
                     BaseTranslateMenu(s);
                 default:
@@ -32,6 +34,41 @@ public class Runner {
         
         
         s.close();
+    }
+
+    // ------------------------
+    // In-terminal Calculator
+    // ------------------------
+    public static void CalculateMenu(Scanner s)
+    {
+        Calculator calc = new Calculator();
+
+        System.out.println("CALCULATOR INPUT COMMAND: \n>calculate \n>exit");
+
+        String sLine = s.nextLine();
+
+        while(!sLine.equals("exit"))
+        {
+            switch(sLine)
+            {
+                case "calculate":
+                    System.out.println("    Note - Write it in Base 10, no spaces, and only +,-,*,/");
+                    System.out.println("    Input your equation:");
+                    sLine = s.nextLine();
+                    calc.setInput(sLine);
+                    System.out.println("|| OUTPUT: " + calc.Calculate() + " ||");
+                    break;
+                default:
+                    System.out.println("Unknown command.");
+                    break;
+            }
+
+            System.out.println("CALCULATOR INPUT COMMAND: \n>calculate \n>exit");
+
+            sLine = s.nextLine();
+        }
+
+        MainMenu(s);
     }
 
     // ------------------------
@@ -98,7 +135,7 @@ public class Runner {
 
             sLine = s.nextLine();
         }
-        
+
         MainMenu(s);
     }
 
