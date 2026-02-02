@@ -32,16 +32,18 @@ public class Runner {
         
         
         s.close();
+
+        System.exit(0);
     }
 
     // ------------------------
     // In-terminal Base Translator
     // ------------------------
-    public static void BaseTranslateMenu(Scanner s)
+    public static void BaseTranslatorTerminal(Scanner s)
     {
         BaseTranslator bT = new BaseTranslator();
 
-        System.out.println("BASE TRANSLATOR INPUT COMMAND: \n>calculate \n>set \n>info \n>exit");
+        System.out.println("BASE TRANSLATOR INPUT COMMAND: \n>calculate \n>set \n>info \n>exit \n");
 
         String sLine = s.nextLine();
 
