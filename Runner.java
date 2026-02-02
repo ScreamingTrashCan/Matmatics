@@ -1,6 +1,5 @@
 import java.awt.Dimension;
 import java.util.Scanner;
-
 import javax.swing.JFrame;
 
 public class Runner {
@@ -103,6 +102,25 @@ public class Runner {
         }
 
         MainMenu(s);
+    }
+
+    // ------------------------
+    // Instantiates GUI
+    // ------------------------
+    public static void setup()
+    {
+        JFrame frame = new JFrame("Matmatics Base Translator");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frame.setUndecorated(false);
+        frame.setSize(new Dimension(1920, 1080));
+        
+        BaseTranslatorGUI panel = new BaseTranslatorGUI();
+        frame.add(panel);
+
+        frame.setVisible(true);
+        frame.toFront();
+        frame.requestFocus();
     }
 
     // ------------------------
