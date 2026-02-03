@@ -77,7 +77,6 @@ public class Runner {
         Calculator calc = new Calculator();
 
         System.out.println("CALCULATOR INPUT COMMAND: \n>calculate \n>exit");
-        System.out.println("CHOOSE A COMMAND: \n>calculator \n>basetranslator \n>exit");
 
         String sLine = s.nextLine();
 
