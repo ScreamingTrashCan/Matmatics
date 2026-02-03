@@ -1,6 +1,13 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
+import java.io.File;
+import java.io.IOException;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
@@ -10,6 +17,9 @@ import java.io.IOException;
 import javax.swing.*;
 
 public class BaseTranslatorGUI extends JPanel {
+    private Font saira;
+    private Font sairaBold;
+    
     private Font saira;
     private Font sairaBold;
     
