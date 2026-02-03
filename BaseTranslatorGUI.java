@@ -42,7 +42,7 @@ public class BaseTranslatorGUI extends JPanel {
         try
         {
             saira = Font.createFont(Font.TRUETYPE_FONT, new File("Media/Fonts/Saira.ttf")).deriveFont(Font.BOLD, 36f);
-            sairaBold = Font.createFont(Font.TRUETYPE_FONT, new File("Media/Fonts/Saira-Bold.ttf")).deriveFont(Font.BOLD, 36f);
+            sairaBold = Font.createFont(Font.TRUETYPE_FONT, new File("Media/Fonts/Saira-Bold.ttf")).deriveFont(Font.BOLD, 42f);
             GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(saira);
             GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(sairaBold);
         }
