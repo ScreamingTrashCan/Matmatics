@@ -5,6 +5,9 @@ import javax.swing.JFrame;
 public class Runner {
     
     public static void main(String[] args) {
+
+        //Debug
+
         Scanner s = new Scanner(System.in);
         MainMenu(s);
     }
@@ -86,10 +89,10 @@ public class Runner {
             {
                 case "calculate":
                     System.out.println("    Note - Write it in Base 10, no spaces, and only +,-,*,/,^");
+                    System.out.println("When nesting parenthesis, use the formatting ([{}])");
                     System.out.println("    Input your equation:");
                     sLine = s.nextLine();
-                    calc.setInput(sLine);
-                    System.out.println("|| OUTPUT: " + calc.Calculate() + " ||");
+                    System.out.println("|| OUTPUT: " + calc.Calculate(sLine) + " ||");
                     break;
                 case "basetranslator":
                     BaseTranslatorTerminal(s);

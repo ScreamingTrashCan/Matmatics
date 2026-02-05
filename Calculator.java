@@ -1,156 +1,308 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class Calculator {
-    
-    private String input;
 
-    private List<String> inputSegments;
+    private int index;
 
-    // Initialize Calculator Object
-    public Calculator()
+    public Double Calculate(String input)
     {
-        input = "";
+        index = 0;
+        return calc(splitInputs(input));
     }
 
     // ------------------------
-    // Calculate
+    // Looping Calculate
     // ------------------------
-    public double Calculate()
+    private Double calc(ArrayList<String> ins)
     {
-        // Initialize operations and ints list
-        inputSegments = splitInputs();
-        List<String> operations =  new ArrayList<>();
-        List<Double> ints = new ArrayList<>();
-        // Add all numbers to ints list
-        for (String in : inputSegments) {
-            try
+        index += 1;
+        if(ins.contains("("))
+        {
+            int start = FindAt("(", ins);
+            System.out.println(start);
+            int end = FindAt(")", ins);
+            System.out.println(end);
+            if(end - start <= 2)
             {
-                ints.add(Double.parseDouble(in));
+                ins.remove(end); 
+                ins.remove(start);
             }
-            catch (Exception e)
+        }
+        if(ins.contains("["))
+        {
+            int start = FindAt("[", ins);
+            System.out.println(start);
+            int end = FindAt("]", ins);
+            System.out.println(end);
+            if(end - start <= 2)
             {
-                operations.add(in);
+                ins.remove(end); 
+                ins.remove(start);
+            }
+        }
+        if(ins.contains("{"))
+        {
+            int start = FindAt("{", ins);
+            System.out.println(start);
+            int end = FindAt("}", ins);
+            System.out.println(end);
+            if(end - start <= 2)
+            {
+                ins.remove(end); 
+                ins.remove(start);
             }
         }
 
-        // Combine and calculate until no operations left
-        while(!operations.isEmpty())
-        {
-        // Order of operation - Exponent
-        if(operations.contains("^"))
-        {
-            for(int i = 0; i < operations.size(); i++)
-            {
-                if(operations.get(i).equals("^"))
-                {
-                    // Combine and exponentiate numbers to left and right of ^
-                    operations.remove(i);
-                    double num = Math.pow(ints.get(i), ints.get(i + 1));
-                    ints.remove(i); ints.remove(i);
-                    ints.add(i, num);
-                    break;
-                }
-            }
+        for (String string : ins) {
+            System.out.println(string);
         }
-        // Order of operations - M & D
-        else if(operations.contains("*") || operations.contains("/"))
-        {
-            for(int i = 0; i < operations.size(); i++)
-            {
-                if(operations.get(i).equals("*"))
-                {
-                    // Combine and multiply numbers to left and right of *
-                    operations.remove(i);
-                    double num = ints.get(i) * ints.get(i + 1);
-                    ints.remove(i); ints.remove(i);
-                    ints.add(i, num);
-                    break;
-                }
-                else if(operations.get(i).equals("/"))
-                {
-                    // Combine and divide numbers to left and right of /
-                    operations.remove(i);
-                    double num = ints.get(i) / ints.get(i + 1);
-                    ints.remove(i); ints.remove(i);
-                    ints.add(i, num);
-                    break;
-                }
-            }
-        }
-        // Order of operation - A & S
-        else if(operations.contains("+") || operations.contains("-"))
-        {
-            for(int i = 0; i < operations.size(); i++)
-            {
-                if(operations.get(i).equals("+"))
-                {
-                    // Combine and add numbers to left and right of +
-                    operations.remove(i);
-                    double num = ints.get(i) + ints.get(i + 1);
-                    ints.remove(i); ints.remove(i);
-                    ints.add(i, num);
-                    break;
-                }
-                else if(operations.get(i).equals("-"))
-                {
-                    // Combine and add numbers to left and right of -
-                    operations.remove(i);
-                    double num = ints.get(i) - ints.get(i + 1);
-                    ints.remove(i); ints.remove(i);
-                    ints.add(i, num);
-                    break;
-                }
-            }
-        }
-        }
+        System.out.println(ins.size());
 
-        return ints.get(0);
+        if(ins.size() != 1)
+        {
+            String newNum = "";
+            int at = 0;
+
+            if(index % 2 == 0)
+            {
+                // Exponent
+            if(ins.contains("^"))
+            {
+                at = FindAt("^", ins);
+                System.out.println("Found a ^ at " + at);
+                newNum = power(at, ins);
+            }
+            // Mult or Div
+            else if(ins.contains("*") || ins.contains("/"))
+            {
+                int at1 = FindAt("*", ins);
+                int at2 = FindAt("/", ins);
+                at = at1 > at2 ? at1 : at2;
+                if(ins.get(at).equals("*"))
+                {
+                    System.out.println("Found a * at " + at);
+                    newNum = mult(at, ins);
+                }
+                else
+                {
+                    System.out.println("Found a / at " + at);
+                    newNum = div(at, ins);
+                }
+            }
+            // Add or Sub
+            else if(ins.contains("+") || ins.contains("-"))
+            {
+                int at1 = FindAt("+", ins);
+                int at2 = FindAt("-", ins);
+                at = at1 > at2 ? at1 : at2;
+                if(ins.get(at).equals("+"))
+                {
+                    System.out.println("Found a + at " + at);
+                    newNum = add(at, ins);
+                }
+                else
+                {
+                    System.out.println("Found a - at " + at);
+                    newNum = sub(at, ins);
+                }
+            }
+            else {
+                newNum = null;
+            }
+            }
+            else
+            {
+                // Add or Sub
+            if(ins.contains("+") || ins.contains("-"))
+            {
+                int at1 = FindAt("+", ins);
+                int at2 = FindAt("-", ins);
+                at = at1 > at2 ? at1 : at2;
+                if(ins.get(at).equals("+"))
+                {
+                    System.out.println("Found a + at " + at);
+                    newNum = add(at, ins);
+                }
+                else
+                {
+                    System.out.println("Found a - at " + at);
+                    newNum = sub(at, ins);
+                }
+            }
+            // Mult or Div
+            else if(ins.contains("*") || ins.contains("/"))
+            {
+                int at1 = FindAt("*", ins);
+                int at2 = FindAt("/", ins);
+                at = at1 > at2 ? at1 : at2;
+                if(ins.get(at).equals("*"))
+                {
+                    System.out.println("Found a * at " + at);
+                    newNum = mult(at, ins);
+                }
+                else
+                {
+                    System.out.println("Found a / at " + at);
+                    newNum = div(at, ins);
+                }
+            }
+                            // Exponent
+            else if(ins.contains("^"))
+            {
+                at = FindAt("^", ins);
+                System.out.println("Found a ^ at " + at);
+                newNum = power(at, ins);
+            }
+            else {
+                newNum = null;
+            }
+            }
+
+            if(newNum != null)
+            {
+                ins.add(at - 1, newNum);
+                ins.remove(at); ins.remove(at); ins.remove(at);
+            }
+
+            return calc(ins);
+        }
+        else
+        {
+            System.out.println("Done!");
+            return Double.parseDouble(ins.get(0));
+        }
     }
 
     // ------------------------
-    // Split Input
+    // Operations
     // ------------------------
-    private List<String> splitInputs()
+    private Double[] leftAndRight(int at, ArrayList<String> all)
+    {
+        Double lefthand, righthand;
+                try {
+                    lefthand = Double.parseDouble(all.get(at - 1));
+                } catch (Exception e) {
+                    System.err.println("Error: Non-Number as lefthand operand.");
+                    return new Double[] {Double.NaN};
+                }
+                try {
+                    righthand = Double.parseDouble(all.get(at + 1));
+                } catch (Exception e) {
+                    System.err.println("Error: Non-Number as righthand operand.");
+                    return new Double[] {Double.NaN};
+                }
+        return new Double[] { lefthand, righthand };
+    }
+
+    private String power(int at, ArrayList<String> all)
+    {
+        Double[] leftAndRight = leftAndRight(at, all);
+        if(leftAndRight[0].isNaN())
+        {
+            return null;
+        }
+        return Double.toString(Math.pow(leftAndRight[0], leftAndRight[1]));
+    }
+
+    private String mult(int at, ArrayList<String> all)
+    {
+        Double[] leftAndRight = leftAndRight(at, all);
+        if(leftAndRight[0].isNaN())
+        {
+            return null;
+        }
+        return Double.toString(leftAndRight[0] * leftAndRight[1]);
+    }
+
+    private String div(int at, ArrayList<String> all)
+    {
+        Double[] leftAndRight = leftAndRight(at, all);
+        if(leftAndRight[0].isNaN())
+        {
+            return null;
+        }
+        return Double.toString(leftAndRight[0] / leftAndRight[1]);
+    }
+
+    private String add(int at, ArrayList<String> all)
+    {
+        Double[] leftAndRight = leftAndRight(at, all);
+        if(leftAndRight[0].isNaN())
+        {
+            return null;
+        }
+        return Double.toString(leftAndRight[0] + leftAndRight[1]);
+    }
+
+    private String sub(int at, ArrayList<String> all)
+    {
+        Double[] leftAndRight = leftAndRight(at, all);
+        if(leftAndRight[0].isNaN())
+        {
+            return null;
+        }
+        return Double.toString(leftAndRight[0] - leftAndRight[1]);
+    }
+
+    // ------------------------
+    // Tokenizer
+    // ------------------------
+    private ArrayList<String> splitInputs(String in)
     {
         // Split input into operations and numbers
-        Character[] equations = new Character[] { '+', '-', '*', '/', '^' };
-        List<String> segs = new ArrayList<>();
+        Character[] newLines = new Character[] { '+', '-', '*', '/', '^', '(', ')', '[', ']', '{', '}' };
+        ArrayList<String> segs = new ArrayList<>();
         String toAdd = "";
-        for(int i = 0; i < input.length(); i++)
+        for(int i = 0; i < in.length(); i++)
         {
-            if(Arrays.asList(equations).contains(input.charAt(i)))
+            if(Arrays.asList(newLines).contains(in.charAt(i)))
             {
                 // Add current number
-                segs.add(toAdd);
+                if(!toAdd.isEmpty()){
+                segs.add(toAdd);}
                 // Add operation
                 toAdd = "";
-                segs.add(Character.toString(input.charAt(i)));
+                segs.add(Character.toString(in.charAt(i)));
             }
             else
             {
                 // Store current digit
-                toAdd += input.charAt(i);
+                toAdd += in.charAt(i);
             }
         }
         // Add final number
-        segs.add(toAdd);
+        if(!toAdd.isEmpty()){
+        segs.add(toAdd);}
         return segs;
     }
 
-
     // ------------------------
-    // Getter & Setter
+    // Find At Method
     // ------------------------
-    public String getInput()
+    private int FindAt(String in, ArrayList<String> allIns)
     {
-        return input;
+        if(index % 2 == 0)
+        {
+            for(int i = 0; i < allIns.size(); i++)
+        {
+            if(allIns.get(i).equals(in))
+            {
+                return i;
+            }
+        }
+        }
+        else
+        {
+            for(int i = allIns.size() -1; i >= 0; i--)
+        {
+            if(allIns.get(i).equals(in))
+            {
+                return i;
+            }
+        }
+        }
+        return 0;
     }
-    public void setInput(String input)
-    {
-        this.input = input;
-    }
-
 
 }
