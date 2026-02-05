@@ -17,11 +17,18 @@ public class Calculator {
     private Double calc(ArrayList<String> ins)
     {
         index += 1;
+
+        // Check for "single parenthesis" and remove them || ex. (10) -> 10
         if(ins.contains("("))
         {
             int start = FindAt("(", ins);
             System.out.println(start);
             int end = FindAt(")", ins);
+            if(end == -1)
+            {
+                System.out.println("Error: No closing parenthesis.");
+                return null;
+            }
             System.out.println(end);
             if(end - start <= 2)
             {
@@ -34,6 +41,11 @@ public class Calculator {
             int start = FindAt("[", ins);
             System.out.println(start);
             int end = FindAt("]", ins);
+            if(end == -1)
+            {
+                System.out.println("Error: No closing parenthesis.");
+                return null;
+            }
             System.out.println(end);
             if(end - start <= 2)
             {
@@ -46,6 +58,11 @@ public class Calculator {
             int start = FindAt("{", ins);
             System.out.println(start);
             int end = FindAt("}", ins);
+            if(end == -1)
+            {
+                System.out.println("Error: No closing parenthesis.");
+                return null;
+            }
             System.out.println(end);
             if(end - start <= 2)
             {
@@ -54,17 +71,31 @@ public class Calculator {
             }
         }
 
-        for (String string : ins) {
+        // Check for single ) parenthesis
+        if(!ins.contains("(") && ins.contains(")"))
+        {
+            ins.remove(FindAt(")", ins));
+        }
+        if(!ins.contains("[") && ins.contains("]"))
+        {
+            ins.remove(FindAt("]", ins));
+        }
+        if(!ins.contains("{") && ins.contains("}"))
+        {
+            ins.remove(FindAt("}", ins));
+        }
+
+        /*for (String string : ins) {
             System.out.println(string);
         }
-        System.out.println(ins.size());
+        System.out.println(ins.size());*/
 
         if(ins.size() != 1)
         {
             String newNum = "";
             int at = 0;
 
-            if(index % 2 == 0)
+            if(index % 4 == 1 || index % 4 == 3)
             {
                 // Exponent
             if(ins.contains("^"))
@@ -111,7 +142,7 @@ public class Calculator {
                 newNum = null;
             }
             }
-            else
+            else if(index % 4 == 2 || index % 4 == 0)
             {
                 // Add or Sub
             if(ins.contains("+") || ins.contains("-"))
@@ -169,7 +200,6 @@ public class Calculator {
         }
         else
         {
-            System.out.println("Done!");
             return Double.parseDouble(ins.get(0));
         }
     }
@@ -282,7 +312,7 @@ public class Calculator {
     // ------------------------
     private int FindAt(String in, ArrayList<String> allIns)
     {
-        if(index % 2 == 0)
+        if(index % 4 == 1 || index % 4 == 3)
         {
             for(int i = 0; i < allIns.size(); i++)
         {
@@ -302,7 +332,7 @@ public class Calculator {
             }
         }
         }
-        return 0;
+        return -1;
     }
 
 }
