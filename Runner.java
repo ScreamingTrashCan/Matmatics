@@ -5,9 +5,6 @@ import javax.swing.JFrame;
 public class Runner {
     
     public static void main(String[] args) {
-
-        //Debug
-
         Scanner s = new Scanner(System.in);
         MainMenu(s);
     }

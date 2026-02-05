@@ -22,14 +22,12 @@ public class Calculator {
         if(ins.contains("("))
         {
             int start = FindAt("(", ins);
-            System.out.println(start);
             int end = FindAt(")", ins);
             if(end == -1)
             {
                 System.out.println("Error: No closing parenthesis.");
                 return null;
             }
-            System.out.println(end);
             if(end - start <= 2)
             {
                 ins.remove(end); 
@@ -39,14 +37,12 @@ public class Calculator {
         if(ins.contains("["))
         {
             int start = FindAt("[", ins);
-            System.out.println(start);
             int end = FindAt("]", ins);
             if(end == -1)
             {
                 System.out.println("Error: No closing parenthesis.");
                 return null;
             }
-            System.out.println(end);
             if(end - start <= 2)
             {
                 ins.remove(end); 
@@ -56,14 +52,12 @@ public class Calculator {
         if(ins.contains("{"))
         {
             int start = FindAt("{", ins);
-            System.out.println(start);
             int end = FindAt("}", ins);
             if(end == -1)
             {
                 System.out.println("Error: No closing parenthesis.");
                 return null;
             }
-            System.out.println(end);
             if(end - start <= 2)
             {
                 ins.remove(end); 
@@ -101,7 +95,6 @@ public class Calculator {
             if(ins.contains("^"))
             {
                 at = FindAt("^", ins);
-                System.out.println("Found a ^ at " + at);
                 newNum = power(at, ins);
             }
             // Mult or Div
@@ -112,12 +105,10 @@ public class Calculator {
                 at = at1 > at2 ? at1 : at2;
                 if(ins.get(at).equals("*"))
                 {
-                    System.out.println("Found a * at " + at);
                     newNum = mult(at, ins);
                 }
                 else
                 {
-                    System.out.println("Found a / at " + at);
                     newNum = div(at, ins);
                 }
             }
@@ -129,12 +120,10 @@ public class Calculator {
                 at = at1 > at2 ? at1 : at2;
                 if(ins.get(at).equals("+"))
                 {
-                    System.out.println("Found a + at " + at);
                     newNum = add(at, ins);
                 }
                 else
                 {
-                    System.out.println("Found a - at " + at);
                     newNum = sub(at, ins);
                 }
             }
@@ -152,12 +141,10 @@ public class Calculator {
                 at = at1 > at2 ? at1 : at2;
                 if(ins.get(at).equals("+"))
                 {
-                    System.out.println("Found a + at " + at);
                     newNum = add(at, ins);
                 }
                 else
                 {
-                    System.out.println("Found a - at " + at);
                     newNum = sub(at, ins);
                 }
             }
@@ -169,12 +156,10 @@ public class Calculator {
                 at = at1 > at2 ? at1 : at2;
                 if(ins.get(at).equals("*"))
                 {
-                    System.out.println("Found a * at " + at);
                     newNum = mult(at, ins);
                 }
                 else
                 {
-                    System.out.println("Found a / at " + at);
                     newNum = div(at, ins);
                 }
             }
@@ -182,7 +167,6 @@ public class Calculator {
             else if(ins.contains("^"))
             {
                 at = FindAt("^", ins);
-                System.out.println("Found a ^ at " + at);
                 newNum = power(at, ins);
             }
             else {
@@ -213,13 +197,11 @@ public class Calculator {
                 try {
                     lefthand = Double.parseDouble(all.get(at - 1));
                 } catch (Exception e) {
-                    System.err.println("Error: Non-Number as lefthand operand.");
                     return new Double[] {Double.NaN};
                 }
                 try {
                     righthand = Double.parseDouble(all.get(at + 1));
                 } catch (Exception e) {
-                    System.err.println("Error: Non-Number as righthand operand.");
                     return new Double[] {Double.NaN};
                 }
         return new Double[] { lefthand, righthand };
