@@ -1,9 +1,11 @@
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Calculator {
 
     private int index;
+    private DecimalFormat format = new DecimalFormat("###,###,##0.0###");
 
     public Double Calculate(String input)
     {
@@ -17,12 +19,13 @@ public class Calculator {
     private Double calc(ArrayList<String> ins)
     {
         index += 1;
+        System.out.println("Loop #" + index);
         if(ins.contains("("))
         {
             int start = FindAt("(", ins);
-            System.out.println(start);
+            //System.out.println(start);
             int end = FindAt(")", ins);
-            System.out.println(end);
+            //System.out.println(end);
             if(end - start <= 2)
             {
                 ins.remove(end); 
@@ -32,9 +35,9 @@ public class Calculator {
         if(ins.contains("["))
         {
             int start = FindAt("[", ins);
-            System.out.println(start);
+            //System.out.println(start);
             int end = FindAt("]", ins);
-            System.out.println(end);
+            //System.out.println(end);
             if(end - start <= 2)
             {
                 ins.remove(end); 
@@ -44,9 +47,9 @@ public class Calculator {
         if(ins.contains("{"))
         {
             int start = FindAt("{", ins);
-            System.out.println(start);
+            //System.out.println(start);
             int end = FindAt("}", ins);
-            System.out.println(end);
+            //System.out.println(end);
             if(end - start <= 2)
             {
                 ins.remove(end); 
@@ -57,7 +60,7 @@ public class Calculator {
         for (String string : ins) {
             System.out.println(string);
         }
-        System.out.println(ins.size());
+        //System.out.println(ins.size());
 
         if(ins.size() != 1)
         {
@@ -111,7 +114,7 @@ public class Calculator {
                 newNum = null;
             }
             }
-            else
+            else if(ins.contains("(") || ins.contains("[") || ins.contains("{"))
             {
                 // Add or Sub
             if(ins.contains("+") || ins.contains("-"))
@@ -158,6 +161,9 @@ public class Calculator {
                 newNum = null;
             }
             }
+            else {
+                newNum = null;
+            }
 
             if(newNum != null)
             {
@@ -182,12 +188,14 @@ public class Calculator {
         Double lefthand, righthand;
                 try {
                     lefthand = Double.parseDouble(all.get(at - 1));
+                    lefthand = Double.parseDouble(format.format(lefthand));
                 } catch (Exception e) {
                     System.err.println("Error: Non-Number as lefthand operand.");
                     return new Double[] {Double.NaN};
                 }
                 try {
                     righthand = Double.parseDouble(all.get(at + 1));
+                    lefthand = Double.parseDouble(format.format(lefthand));
                 } catch (Exception e) {
                     System.err.println("Error: Non-Number as righthand operand.");
                     return new Double[] {Double.NaN};
@@ -255,22 +263,28 @@ public class Calculator {
         ArrayList<String> segs = new ArrayList<>();
         String toAdd = "";
         for(int i = 0; i < in.length(); i++)
+{
+    char c = in.charAt(i);
+
+    if(c == '-' && (i == 0 || Arrays.asList(newLines).contains(in.charAt(i-1))))
+    {
+        toAdd += c; // negative number
+    }
+    else if(Arrays.asList(newLines).contains(c))
+    {
+        if(!toAdd.isEmpty())
         {
-            if(Arrays.asList(newLines).contains(in.charAt(i)))
-            {
-                // Add current number
-                if(!toAdd.isEmpty()){
-                segs.add(toAdd);}
-                // Add operation
-                toAdd = "";
-                segs.add(Character.toString(in.charAt(i)));
-            }
-            else
-            {
-                // Store current digit
-                toAdd += in.charAt(i);
-            }
+            segs.add(toAdd);
         }
+
+        toAdd = "";
+        segs.add(Character.toString(c));
+    }
+    else
+    {
+        toAdd += c;
+    }
+}
         // Add final number
         if(!toAdd.isEmpty()){
         segs.add(toAdd);}

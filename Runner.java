@@ -7,6 +7,8 @@ public class Runner {
     public static void main(String[] args) {
 
         //Debug
+        NewtonsMethod nw = new NewtonsMethod("x^5-4x^3+2x+3", "5x^4-12x^2+2");
+        System.out.println("AAA " + nw.Calculate(-1.8, 20));
 
         Scanner s = new Scanner(System.in);
         MainMenu(s);
@@ -21,7 +23,7 @@ public class Runner {
 
         do
         {
-            System.out.println("CHOOSE A COMMAND: \n>calculator \n>basetranslator \n>exit \n");
+            System.out.println("CHOOSE A COMMAND: \n>calculator \n>basetranslator  \n>newtons \n>exit \n");
 
             sLine = s.nextLine();
 
@@ -58,6 +60,9 @@ public class Runner {
                                 System.out.println("Unknown command.\n");
                         }
                     } while(!sLine.equals("back"));
+                case "newtons":
+                    NewtonsMethodTerminal(s);
+                    break;
                 case "exit":
                     System.out.println("Exiting program...\n");
                     break;
@@ -89,7 +94,7 @@ public class Runner {
             {
                 case "calculate":
                     System.out.println("    Note - Write it in Base 10, no spaces, and only +,-,*,/,^");
-                    System.out.println("When nesting parenthesis, use the formatting ([{}])");
+                    System.out.println("    When nesting parenthesis, use the formatting ([{}])");
                     System.out.println("    Input your equation:");
                     sLine = s.nextLine();
                     System.out.println("|| OUTPUT: " + calc.Calculate(sLine) + " ||");
@@ -198,4 +203,66 @@ public class Runner {
         
         MainMenu(s);
     }
+
+    // ------------------------
+    // In-terminal Newtons Method
+    // ------------------------
+    public static void NewtonsMethodTerminal(Scanner s)
+{
+    NewtonsMethod nm = null;
+
+    System.out.println("NEWTON'S METHOD INPUT COMMAND: \n>set \n>calculate \n>info \n>exit \n");
+
+    String sLine = s.nextLine();
+
+    System.out.println();
+
+    while(!sLine.equals("exit"))
+    {
+        switch(sLine)
+        {
+            case "set":
+                        System.out.println("      Enter original equation:");
+                        String orig = s.nextLine();
+                        System.out.println("      Enter derivative equation:");
+                        String deriv = s.nextLine();
+                        nm = new NewtonsMethod(orig, deriv);
+                        System.out.println("   Equations set.\n");      
+                break;
+            case "calculate":
+                if(nm == null) {
+                    System.out.println("Error: No equations set. Use >set first.\n");
+                    break;
+                }
+                try {
+                    System.out.println("   Enter initial guess:");
+                    double initial = Double.parseDouble(s.nextLine());
+                    System.out.println("   Enter number of iterations:");
+                    int iterations = Integer.parseInt(s.nextLine());
+                    System.out.println("|| OUTPUT: " + nm.Calculate(initial, iterations) + " ||");
+                } catch(Exception e) {
+                    System.out.println("Error: Could not complete operation. " + e + "\n");
+                }
+                break;
+            case "info":
+                if(nm == null) {
+                    System.out.println("No equations set yet. Use >set first.\n");
+                } else {
+                    System.out.println(nm.toString());
+                }
+                break;
+            default:
+                System.out.println("Unknown command.\n");
+                break;
+        }
+
+        System.out.println("INPUT COMMAND: \n>set \n>calculate \n>info \n>exit");
+
+        sLine = s.nextLine();
+
+        System.out.println();
+    }
+
+    MainMenu(s);
+}
 }
