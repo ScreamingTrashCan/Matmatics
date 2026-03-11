@@ -1,14 +1,18 @@
+
 import java.awt.Dimension;
 import java.util.Scanner;
 import javax.swing.JFrame;
 
 public class Runner {
-    
+
     public static void main(String[] args) {
 
         //Debug
-        NewtonsMethod nw = new NewtonsMethod("x^5-4x^3+2x+3", "5x^4-12x^2+2");
-        System.out.println("AAA " + nw.Calculate(-1.8, 20));
+        //NewtonsMethod nw = new NewtonsMethod("x^6-5x^5+12x^4-3x^3+2x^2-x+3", "6x^5-25x^4+48x^3-9x^2+4x-1");
+        //System.out.println(nw.Calculate(1, 50));
+
+        //Calculator c = new Calculator();
+        //System.out.println(c.Calculate("5*10^4+3*10^3"));
 
         Scanner s = new Scanner(System.in);
         MainMenu(s);
@@ -17,33 +21,28 @@ public class Runner {
     // ------------------------
     // Main Menu
     // ------------------------
-    public static void MainMenu(Scanner s)
-    {
+    public static void MainMenu(Scanner s) {
         String sLine;
 
-        do
-        {
+        do {
             System.out.println("CHOOSE A COMMAND: \n>calculator \n>basetranslator  \n>newtons \n>exit \n");
 
             sLine = s.nextLine();
 
             System.out.println();
 
-            switch(sLine)
-            {
+            switch (sLine) {
                 case "calculator":
                     CalculateMenu(s);
                 case "basetranslator":
-                    do
-                    {
+                    do {
                         System.out.println("CHOOSE A TYPE: \n>gui \n>terminal \n>back \n");
 
                         sLine = s.nextLine();
 
                         System.out.println();
 
-                        switch(sLine)
-                        {
+                        switch (sLine) {
                             case "gui":
                                 setup();
                                 MainMenu(s);
@@ -59,7 +58,7 @@ public class Runner {
                             default:
                                 System.out.println("Unknown command.\n");
                         }
-                    } while(!sLine.equals("back"));
+                    } while (!sLine.equals("back"));
                 case "newtons":
                     NewtonsMethodTerminal(s);
                     break;
@@ -70,8 +69,8 @@ public class Runner {
                     System.out.println("Unknown command.\n");
                     break;
             }
-        } while(!sLine.equals("exit"));
-        
+        } while (!sLine.equals("exit"));
+
         s.close();
 
         System.exit(0);
@@ -80,18 +79,15 @@ public class Runner {
     // ------------------------
     // In-terminal Calculator
     // ------------------------
-    public static void CalculateMenu(Scanner s)
-    {
+    public static void CalculateMenu(Scanner s) {
         Calculator calc = new Calculator();
 
         System.out.println("CALCULATOR INPUT COMMAND: \n>calculate \n>exit");
 
         String sLine = s.nextLine();
 
-        while(!sLine.equals("exit"))
-        {
-            switch(sLine)
-            {
+        while (!sLine.equals("exit")) {
+            switch (sLine) {
                 case "calculate":
                     System.out.println("    Note - Write it in Base 10, no spaces, and only +,-,*,/,^");
                     System.out.println("    When nesting parenthesis, use the formatting ([{}])");
@@ -117,14 +113,13 @@ public class Runner {
     // ------------------------
     // Instantiates GUI
     // ------------------------
-    public static void setup()
-    {
+    public static void setup() {
         JFrame frame = new JFrame("Matmatics Base Translator");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setUndecorated(false);
         frame.setSize(new Dimension(1920, 1080));
-        
+
         BaseTranslatorGUI panel = new BaseTranslatorGUI();
         frame.add(panel);
 
@@ -136,8 +131,7 @@ public class Runner {
     // ------------------------
     // In-terminal Base Translator
     // ------------------------
-    public static void BaseTranslatorTerminal(Scanner s)
-    {
+    public static void BaseTranslatorTerminal(Scanner s) {
         BaseTranslator bT = new BaseTranslator();
 
         System.out.println("BASE TRANSLATOR INPUT COMMAND: \n>calculate \n>set \n>info \n>exit \n");
@@ -146,10 +140,8 @@ public class Runner {
 
         System.out.println();
 
-        while(!sLine.equals("exit"))
-        {
-            switch(sLine)
-            {
+        while (!sLine.equals("exit")) {
+            switch (sLine) {
                 case "calculate":
                     bT.calculate();
                     System.out.println("|| OUTPUT: " + bT.getOutput() + " ||");
@@ -158,8 +150,7 @@ public class Runner {
                     System.out.println("   What would you like to change? \n   >input \n   >output \n   >inbase \n   >outbase   \n");
                     sLine = s.nextLine();
                     System.out.println("      Choose value:");
-                    switch(sLine)
-                    {
+                    switch (sLine) {
                         case "input":
                             bT.setInput(s.nextLine());
                             break;
@@ -169,16 +160,14 @@ public class Runner {
                         case "inbase":
                             try {
                                 bT.setInBase(Integer.parseInt(s.nextLine()));
-                            }
-                            catch (Exception e){
+                            } catch (Exception e) {
                                 System.out.println("Error: Could not complete operation. " + e);
                             }
                             break;
                         case "outbase":
                             try {
                                 bT.setOutBase(Integer.parseInt(s.nextLine()));
-                            }
-                            catch (Exception e){
+                            } catch (Exception e) {
                                 System.out.println("Error: Could not complete operation. " + e);
                             }
                             break;
@@ -200,69 +189,67 @@ public class Runner {
 
             System.out.println();
         }
-        
+
         MainMenu(s);
     }
 
     // ------------------------
     // In-terminal Newtons Method
     // ------------------------
-    public static void NewtonsMethodTerminal(Scanner s)
-{
-    NewtonsMethod nm = null;
+    public static void NewtonsMethodTerminal(Scanner s) {
+        NewtonsMethod nm = null;
 
-    System.out.println("NEWTON'S METHOD INPUT COMMAND: \n>set \n>calculate \n>info \n>exit \n");
+        System.out.println("NEWTON'S METHOD INPUT COMMAND: \n>set \n>calculate \n>info \n>exit \n");
 
-    String sLine = s.nextLine();
-
-    System.out.println();
-
-    while(!sLine.equals("exit"))
-    {
-        switch(sLine)
-        {
-            case "set":
-                        System.out.println("      Enter original equation:");
-                        String orig = s.nextLine();
-                        System.out.println("      Enter derivative equation:");
-                        String deriv = s.nextLine();
-                        nm = new NewtonsMethod(orig, deriv);
-                        System.out.println("   Equations set.\n");      
-                break;
-            case "calculate":
-                if(nm == null) {
-                    System.out.println("Error: No equations set. Use >set first.\n");
-                    break;
-                }
-                try {
-                    System.out.println("   Enter initial guess:");
-                    double initial = Double.parseDouble(s.nextLine());
-                    System.out.println("   Enter number of iterations:");
-                    int iterations = Integer.parseInt(s.nextLine());
-                    System.out.println("|| OUTPUT: " + nm.Calculate(initial, iterations) + " ||");
-                } catch(Exception e) {
-                    System.out.println("Error: Could not complete operation. " + e + "\n");
-                }
-                break;
-            case "info":
-                if(nm == null) {
-                    System.out.println("No equations set yet. Use >set first.\n");
-                } else {
-                    System.out.println(nm.toString());
-                }
-                break;
-            default:
-                System.out.println("Unknown command.\n");
-                break;
-        }
-
-        System.out.println("INPUT COMMAND: \n>set \n>calculate \n>info \n>exit");
-
-        sLine = s.nextLine();
+        String sLine = s.nextLine();
 
         System.out.println();
-    }
 
-    MainMenu(s);
-}
+        while (!sLine.equals("exit")) {
+            switch (sLine) {
+                case "set":
+                    System.out.println("      Enter original equation:");
+                    String orig = s.nextLine();
+                    System.out.println("      Enter derivative equation:");
+                    String deriv = s.nextLine();
+                    nm = new NewtonsMethod(orig, deriv);
+                    System.out.println("   Equations set.\n");
+                    break;
+                case "calculate":
+                    if (nm == null) {
+                        System.out.println("Error: No equations set. Use >set first.\n");
+                        break;
+                    }
+                    try {
+                        System.out.println("   Enter initial guess:");
+                        double initial = Double.parseDouble(s.nextLine());
+                        System.out.println("   Enter number of iterations:");
+                        System.out.println("(WARNING: The higher the iteration count the more prone it is to failure)");
+                        int iterations = Integer.parseInt(s.nextLine());
+                        System.out.println("|| OUTPUT: " + nm.Calculate(initial, iterations) + " ||");
+                    } catch (Exception e) {
+                        System.out.println("Error: Could not complete operation. " + e + "\n");
+                    }
+                    break;
+                case "info":
+                    if (nm == null) {
+                        System.out.println("No equations set yet. Use >set first.\n");
+                    } else {
+                        System.out.println(nm.toString());
+                    }
+                    break;
+                default:
+                    System.out.println("Unknown command.\n");
+                    break;
+            }
+
+            System.out.println("INPUT COMMAND: \n>set \n>calculate \n>info \n>exit");
+
+            sLine = s.nextLine();
+
+            System.out.println();
+        }
+
+        MainMenu(s);
+    }
 }
