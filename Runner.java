@@ -20,12 +20,13 @@ public class Runner {
             debug = false;
         }
 
+        Calculator c = new Calculator();
 
         //NewtonsMethod nw = new NewtonsMethod();
         //System.out.println(nw.Calculate("x^5-2x^4+3x^3-8x^2+10x-4", "5x^4-8x^3+9x^2-16x+10", 2, 70));
-        
-    }
 
+        CLI cli = new CLI();
+    }
 
     // -------
     // Statues
