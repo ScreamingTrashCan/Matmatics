@@ -31,10 +31,11 @@ public class BaseTranslator {
         base10Number = BigInteger.ZERO;
     }
 
-    // ------------------------
-    // Calculate
-    // ------------------------
-    public void calculate() {
+    // -----------------------
+    // Public Calculate Method
+    // -----------------------
+    public String Calculate() {
+        try {
         // If the input base is within range of 2 - 36
         if (inputBase >= 2 && inputBase <= 36 && outputBase >= 2 && outputBase <= 36) {
             base10Number = Normalize(input, inputBase);
@@ -47,26 +48,40 @@ public class BaseTranslator {
             } // Non-valid character used
             else if (base10Number.equals(BigInteger.valueOf(-999))) {
                 output = "Error! Not a valid character.";
+                Runner.statusError();
             } // Used a negative number
             else if (base10Number.equals(BigInteger.valueOf(-1))) {
                 output = "Error! Cannot be a negative number.";
+                Runner.statusError();
             } // Used a character outside of scope
             else if (base10Number.equals(BigInteger.valueOf(-67))) {
                 output = "Error! Used a character with a higher value than the input base.";
+                Runner.statusError();
             } // Other errors
             else {
                 output = "Error! Something went wrong :(";
+                Runner.statusError();
             }
         } else if (inputBase < 2 || inputBase > 36) {
             output = "Error! Input Base must be in the range of 2 - 36.";
+            Runner.statusError();
         } else {
             output = "Error! Output Base must be in the range of 2 - 36.";
+            Runner.statusError();
+        }
+        return output;
+        }
+        catch (Exception e)
+        {
+            Runner.debugText("Ran into an unknown error!");
+            Runner.statusFatalError();
+            return null;
         }
     }
 
-    // ------------------------
+    // --------------------------------------
     // Convert character to a Base 10 Integer
-    // ------------------------
+    // --------------------------------------
     public Long BaseTenValue(char c) {
         // Ensure it uses valid characters
         if (c == '-') {
@@ -83,9 +98,9 @@ public class BaseTranslator {
         return 0L;
     }
 
-    // ------------------------
-    // Operations
-    // ------------------------
+    // -------------------
+    // Finalize the String
+    // -------------------
     String FinalizeString(BigInteger input) {
         // Combine all characters into a string
         String out = "";
@@ -95,6 +110,9 @@ public class BaseTranslator {
         return out;
     }
 
+    // ----------------
+    // Amount of Digits
+    // ----------------
     void AmountOfDigits(BigInteger input) {
         // Determines the amount of digits that the output will have
         BigInteger number = input;
@@ -106,6 +124,9 @@ public class BaseTranslator {
         }
     }
 
+    // -------------------
+    // Normalize to Base 10
+    // --------------------
     BigInteger Normalize(String input, int inBase) {
         // Turns the input into a normalized Base 10 BigInteger
         BigInteger out = BigInteger.ZERO;
@@ -128,6 +149,9 @@ public class BaseTranslator {
         return out;
     }
 
+    // ---------------
+    // Add Digit Values
+    // ----------------
     void AddDigitValues(BigInteger num, int baseInt) {
         // The "amount" of each digit there are in the normalized number (ex. 145 contains one 100, four 10s, and five 1s)
         digitValues = new ArrayList<>();
@@ -142,9 +166,9 @@ public class BaseTranslator {
         }
     }
 
-    // ------------------------
+    // ---------
     // To String
-    // ------------------------
+    // ---------
     @Override
     public String toString() {
         String str = "";
@@ -156,37 +180,30 @@ public class BaseTranslator {
         return str;
     }
 
-    // ------------------------
-    // Getter and Setter
-    // ------------------------
+    // ---------------
+    // Getter & Setter
+    // ---------------
     public String getInput() {
         return input;
     }
-
     public void setInput(String input) {
         this.input = input;
     }
-
     public String getOutput() {
         return output;
     }
-
     public void setOutput(String output) {
         this.output = output;
     }
-
     public int getInBase() {
         return inputBase;
     }
-
     public void setInBase(int inputBase) {
         this.inputBase = inputBase;
     }
-
     public int getOutBase() {
         return outputBase;
     }
-
     public void setOutBase(int outputBase) {
         this.outputBase = outputBase;
     }
