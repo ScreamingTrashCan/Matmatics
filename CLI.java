@@ -24,7 +24,20 @@ public class CLI {
         println("(2) Base Translator", "default");
         println("(3) Exit\n", "default");
 
-        input = scanInput(new ArrayList<>(Arrays.asList(1,2,3))); // Takes in possible integer values
+        input = scanChoice(new ArrayList<>(Arrays.asList(1,2,3))); // Takes in possible integer values
+
+        switch (input)
+        {
+            case 1: // Calculator
+                Calculator c = new Calculator();
+                System.out.println(c.Calculate("1+1"));
+                break;
+            case 2: // Base Translator
+                break;
+            case 3: // Exit
+                System.exit(0);
+                break;
+        }
     }
 
     private void println(String text, String key)
@@ -34,7 +47,7 @@ public class CLI {
         System.out.println(color + text + textColors.get("default"));
     }
 
-    private int scanInput(ArrayList<Integer> validInputs)
+    private int scanChoice(ArrayList<Integer> validInputs)
     {
         int input = 999;
 
@@ -70,6 +83,8 @@ public class CLI {
                 System.out.println("\n");
             }
         } while (!validInputs.contains(input));
+
+        System.out.println("\n");
 
         return input;
     }
