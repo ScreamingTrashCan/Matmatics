@@ -193,18 +193,18 @@ public class Calculator {
                     if (contains(newInput, "^")) {
                         foundAt = FindAt("^", 1, newInput);
                         newAt = power(foundAt, newInput);
-                    } else if (contains(newInput, "*")) {
-                        foundAt = FindAt("*", 1, newInput);
-                        newAt = mult(foundAt, newInput);
-                    } else if (contains(newInput, "/")) {
-                        foundAt = FindAt("/", 1, newInput);
-                        newAt = div(foundAt, newInput);
-                    } else if (contains(newInput, "+")) {
-                        foundAt = FindAt("+", 1, newInput);
-                        newAt = add(foundAt, newInput);
-                    } else if (contains(newInput, "-")) {
-                        foundAt = FindAt("-", 1, newInput);
-                        newAt = sub(foundAt, newInput);
+                    } else if (contains(newInput, "*") || contains(newInput, "/")) {
+                        int multfoundAt = FindAt("*", 1, newInput);
+                        int divfoundAt = FindAt("/", 1, newInput);
+                        foundAt = multfoundAt < divfoundAt ? multfoundAt : divfoundAt;
+                        Runner.debugText("Found MD at " + foundAt);
+                        newAt = multfoundAt < divfoundAt ? mult(foundAt, newInput) : div(foundAt, newInput);
+                    } else if (contains(newInput, "+") || contains(newInput, "-")) {
+                        int addfoundAt = FindAt("+", 1, newInput);
+                        int subfoundAt = FindAt("-", 1, newInput);
+                        foundAt = subfoundAt < addfoundAt ? subfoundAt : addfoundAt;
+                        Runner.debugText("Found AS at " + foundAt);
+                        newAt = subfoundAt < addfoundAt ? sub(foundAt, newInput) : add(foundAt, newInput);
                     }
 
                     if (foundAt != 0) {
@@ -250,7 +250,7 @@ public class Calculator {
                 }
             }
         }
-        return -1;
+        return 999;
     }
 
     private int FindAtNested(String operator, int nestedLevel, ArrayList<Oper> allIns) {
@@ -261,13 +261,14 @@ public class Calculator {
                 return i;
             }
         }
-        return -1;
+        return 999;
     }
 
     // ----------
     // Operations
     // ----------
     public Double[] leftAndRight(int at, ArrayList<Oper> opers) {
+        Runner.debugText("Checking " + opers.get(at).toString() + " at " + at);
         Double lefthand, righthand;
         try {
             lefthand = opers.get(at - 1).operand();
