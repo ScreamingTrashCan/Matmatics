@@ -59,17 +59,17 @@ public class CLI {
 
                 if (!validInputs.contains(input) && input != 0)
                 {
-                    System.out.println("\n" + input + " is not a valid choice! (0 for choices)\n");
+                    println("\n" + input + " is not a valid choice! (0 for help)\n", "red");
                 }
             }
             catch (Exception e)
             {
-                System.out.println("\nMust enter an integer! (0 for choices)\n");
+                println("\nMust enter an integer! (0 for help)\n", "red");
             }
 
             if (input == 0) // User has asked for the valid choices
             {
-                System.out.print("\nValid Choices: ");
+                println("Valid Choices: ", "default");
 
                 for (int i = 0; i < validInputs.size(); i++)
                 {
