@@ -33,12 +33,12 @@ public class Calculator {
             output = calc(opers);
         } catch (Exception e) {
             Runner.statusFatalError();
-            System.out.println("Ran into an unknown error!");
+            Runner.debugText("Ran into an unknown error!");
         }
         if (output != null && opers != null) {
             return output;
         } else {
-            System.out.println("Sorry, we couldn't compute the expression.");
+            //System.out.println("Sorry, we couldn't compute the expression.");
             Runner.statusError();
             return null;
         }
