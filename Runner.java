@@ -1,3 +1,4 @@
+
 public class Runner {
 
     public static boolean debug = false;
@@ -12,16 +13,18 @@ public class Runner {
 
     public static void main(String[] args) {
 
-        try
-        {
+        try {
             debug = args[0].equals("debug");
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             debug = false;
         }
 
-        NewtonsMethod nw = new NewtonsMethod();
-        System.out.println(nw.Calculate("-x^3+11x^2-39x+48", "-3x^2+22x-39", 1.8, 10));
+        CurveApproximator ca = new CurveApproximator();
+        ca.setEquation("6-x^2");
+        ca.setInterval(new double[]{0, 2});
+        for (int i = 0; i <= 2; i++) {
+            System.out.println(ca.Calculate(2)[i]);
+        }
 
         CLI cli = new CLI();
     }
@@ -29,27 +32,26 @@ public class Runner {
     // -------
     // Statuses
     // -------
-    public static Status getStatus()
-    {
+    public static Status getStatus() {
         return status;
     }
-    public static void statusNormal()
-    {
+
+    public static void statusNormal() {
         status = Status.Normal;
         debugText("Status set to normal.");
     }
-    public static void statusThinking()
-    {
+
+    public static void statusThinking() {
         status = Status.Thinking;
         debugText("Status set to thinking.");
     }
-    public static void statusError()
-    {
+
+    public static void statusError() {
         status = Status.Error;
         debugText("Status set to error.");
     }
-    public static void statusFatalError()
-    {
+
+    public static void statusFatalError() {
         status = Status.FatalError;
         debugText("Status set to fatal error.");
     }
@@ -57,10 +59,8 @@ public class Runner {
     // --------------
     // Debug Dialogue
     // --------------
-    public static void debugText(String txt)
-    {
-        if(debug)
-        {
+    public static void debugText(String txt) {
+        if (debug) {
             System.out.println(txt);
         }
     }
