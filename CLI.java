@@ -36,6 +36,7 @@ public class CLI {
                     // Calculator
                     // ----------
                     input = 0;
+
                     println("Welcome to the calculator interface! Choose an option:", "blue");
                     println("(1) Calculate an Equation", "default");
                     println("(2) Exit\n", "default");
@@ -71,14 +72,14 @@ public class CLI {
                     // Base Translator
                     // ---------------
                     BaseTranslator bT = new BaseTranslator();
-                    input = 0;
-                    println("Welcome to the base translator interface! Choose an option:", "blue");
-                    println("(1) Calculate your inputs", "default");
-                    println("(2) Change input number and base", "default");
-                    println("(3 Change output base", "default");
-                    println("(4) Exit", "default");
+                    input = 999;
 
                     while (input != 4) {
+                        println("Welcome to the base translator interface! Choose an option:", "blue");
+                        println("(1) Calculate your inputs", "default");
+                        println("(2) Change input number and base", "default");
+                        println("(3) Change output base", "default");
+                        println("(4) Exit", "default");
                         println("\nChoose an option:\n", "default");
                         input = scanChoice(new ArrayList<>(Arrays.asList(1, 2, 3, 4)));
 
@@ -88,7 +89,7 @@ public class CLI {
                                 try {
                                     output = bT.Calculate();
                                 } catch (Exception e) {
-                                    output = "Ran into an unknown error!";
+                                    output = "Ran into an unknown error!\n";
                                 }
                                 switch (output) {
                                     case "Error! Not a valid character.":
@@ -97,10 +98,10 @@ public class CLI {
                                     case "Error! Something went wrong :(":
                                     case "Error! Input Base must be in the range of 2 - 36.":
                                     case "Ran into an unknown error!":
-                                        println(output, "red");
+                                        println(output + "\n", "red");
                                         break;
                                     default:
-                                        println(output, "default");
+                                        println("Output: " + output + "\n", "default");
                                         break;
                                 }
                                 break;
@@ -110,14 +111,16 @@ public class CLI {
                                 println("\nPlease input your input base:\n", "default");
                                 try {
                                     bT.setInBase(Integer.parseInt(scanner.nextLine()));
+                                    System.out.println();
                                 } catch (Exception e) {
                                     println("\nError! Invalid input base.", "red");
                                 }
                                 break;
                             case 3: // Set Outbase
-                                println("Please input your outputs base:\n", "default");
+                                println("Please input your output's base:\n", "default");
                                 try {
                                     bT.setOutBase(Integer.parseInt(scanner.nextLine()));
+                                    System.out.println();
                                 } catch (Exception e) {
                                     println("\nError! Invalid output base.", "red");
                                 }
@@ -162,7 +165,7 @@ public class CLI {
 
             if (input == 0) // User has asked for the valid choices
             {
-                println("Valid Choices: ", "default");
+                println("\nValid Choices: ", "red");
 
                 for (int i = 0; i < validInputs.size(); i++) {
                     System.out.print(validInputs.get(i));
@@ -178,7 +181,7 @@ public class CLI {
             }
         } while (!validInputs.contains(input));
 
-        System.out.println("\n");
+        System.out.println();
 
         return input;
     }
