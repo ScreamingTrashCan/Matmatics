@@ -39,6 +39,12 @@ public class BaseTranslator {
         // If the input base is within range of 2 - 36
         if (inputBase >= 2 && inputBase <= 36 && outputBase >= 2 && outputBase <= 36) {
             base10Number = Normalize(input, inputBase);
+            // First checks if the user's input exists; if not, the calculation doesn't run and an error is produced, telling the user to set a proper value first.
+            if (input == "") {
+                output = "Error! Please use option (2) to enter a proper value before calculating.";
+                Runner.statusError(); // (Specific status might need to be changed) - Wyatt
+                return output;
+            }
             // If the number is valid (is positive, contains correct characters, and characters are within scope)
             if (!base10Number.equals(BigInteger.valueOf(-999)) && !base10Number.equals(BigInteger.valueOf(-1)) && !base10Number.equals(BigInteger.valueOf(-67))) {
                 AddDigitValues(base10Number, outputBase);

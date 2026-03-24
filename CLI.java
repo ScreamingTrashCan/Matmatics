@@ -20,12 +20,14 @@ public class CLI {
         textColors.put("blue", "\u001B[34m");
         textColors.put("purple", "\u001B[35m");
 
+        System.out.println();
+
         while (mainInput != 3) // Not the Exit function
         {
             // ------------------
             // Start of interface
             // ------------------
-            println("\nWelcome to Matmatics! Choose an option:", "purple");
+            println("Welcome to Matmatics! Choose an option:", "purple");
             println("(1) Calculator", "default");
             println("(2) Base Translator", "default");
             println("(3) Exit\n", "default");
@@ -39,10 +41,10 @@ public class CLI {
 
                     println("Welcome to the calculator interface! Choose an option:", "blue");
                     println("(1) Calculate an Equation", "default");
-                    println("(2) Exit\n", "default");
+                    println("(2) Return to Main Menu\n", "default");
 
-                    while (input != 2) {
-                        println("\nChoose an option:\n", "default");
+                    while (input != 2) { // Not the Exit function
+                        println("Choose an option:\n", "default");
                         input = scanChoice(new ArrayList<>(Arrays.asList(1, 2)));
 
                         switch (input) {
@@ -79,7 +81,7 @@ public class CLI {
                         println("(1) Calculate your inputs", "default");
                         println("(2) Change input number and base", "default");
                         println("(3) Change output base", "default");
-                        println("(4) Exit", "default");
+                        println("(4) Return to Main Menu", "default");
                         println("\nChoose an option:\n", "default");
                         input = scanChoice(new ArrayList<>(Arrays.asList(1, 2, 3, 4)));
 
@@ -92,6 +94,7 @@ public class CLI {
                                     output = "Ran into an unknown error!\n";
                                 }
                                 switch (output) {
+                                    case "Error! Please use option (2) to enter a proper value before calculating.":
                                     case "Error! Not a valid character.":
                                     case "Error! Cannot be a negative number.":
                                     case "Error! Used a character with a higher value than the input base.":
@@ -131,6 +134,7 @@ public class CLI {
                     }
                     break;
                 case 3: // Exit
+                    println("Goodbye!\n", "purple");
                     System.exit(0);
                     break;
             }
