@@ -1,4 +1,6 @@
 
+
+
 public class Runner {
 
     public static boolean debug = false;
@@ -18,13 +20,7 @@ public class Runner {
         } catch (Exception e) {
             debug = false;
         }
-
-        CurveApproximator ca = new CurveApproximator();
-        ca.setEquation("6-x^2");
-        ca.setInterval(new double[]{0, 2});
-        for (int i = 0; i <= 2; i++) {
-            System.out.println(ca.Calculate(2)[i]);
-        }
+        
 
         CLI cli = new CLI();
     }
