@@ -30,8 +30,9 @@ public class CLI {
             println("Welcome to Matmatics! Choose an option:", "purple");
             println("(1) Calculator", "default");
             println("(2) Base Translator", "default");
-            println("(3) Exit\n", "default");
-            mainInput = scanChoice(new ArrayList<>(Arrays.asList(1, 2, 3))); // Takes in possible integer values
+            println("(3) Curve Approximator", "default");
+            println("(4) Exit\n", "default");
+            mainInput = scanChoice(new ArrayList<>(Arrays.asList(1, 2, 3, 4))); // Takes in possible integer values
             switch (mainInput) {
                 case 1:
                     // ----------
@@ -81,7 +82,7 @@ public class CLI {
                         println("(1) Calculate your inputs", "default");
                         println("(2) Change input number and base", "default");
                         println("(3) Change output base", "default");
-                        println("(4) Return to Main Menu", "default");
+                        println("(4) Return to Main Menu\n", "default");
                         println("\nChoose an option:\n", "default");
                         input = scanChoice(new ArrayList<>(Arrays.asList(1, 2, 3, 4)));
 
@@ -133,7 +134,63 @@ public class CLI {
                         }
                     }
                     break;
-                case 3: // Exit
+                case 3:
+                    // ------------------
+                    // Curve Approximator
+                    // ------------------
+                    CurveApproximator ca = new CurveApproximator();
+                    input = 999;
+
+                    while (input != 4) {
+                        println("Welcome to the curve approximator interface! Choose an option:", "blue");
+                        println("(1) Calculate your inputs", "default");
+                        println("(2) Set the equation", "default");
+                        println("(3) Set the interval", "default");
+                        println("(4) Return to the Main Menu\n", "default");
+                        input = scanChoice(new ArrayList<>(Arrays.asList(1, 2, 3, 4)));
+
+                        switch (input) {
+                            case 1: // Calculate
+                                int n = 0;
+                                println("\nHow many rectangles would you like to use?", "default");
+                                try {
+                                    n = Integer.parseInt(scanner.nextLine());
+                                } catch (Exception e) {
+                                    println("\nError: Not a number.", "red");
+                                }
+                                double[] endPoints = ca.Calculate(n);
+                                try {
+                                    println("LEPs: " + endPoints[0], "default");
+                                    println("REPs: " + endPoints[1], "default");
+                                    println("MEPs: " + endPoints[2] + "\n", "default");
+                                } catch (Exception e) {
+                                }
+                                break;
+                            case 2: // Set Equation
+                                println("\nPlease input an equation:", "default");
+                                ca.setEquation(scanner.nextLine());
+                                break;
+                            case 3: // Set Interval
+                                int l = 0;
+                                int r = 0;
+                                println("\nWhat is the starting point?", "default");
+                                try {
+                                    l = Integer.parseInt(scanner.nextLine());
+                                } catch (Exception e) {
+                                }
+                                println("\nWhat is the ending point?", "default");
+                                try {
+                                    r = Integer.parseInt(scanner.nextLine());
+                                } catch (Exception e) {
+                                }
+                                ca.setInterval(new double[]{l, r});
+                                break;
+                            case 4: // Exit
+                                break;
+                        }
+                    }
+                    break;
+                case 4: // Exit
                     println("Goodbye!\n", "purple");
                     System.exit(0);
                     break;

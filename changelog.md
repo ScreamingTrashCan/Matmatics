@@ -1,6 +1,16 @@
 # Change Log
 *Whenever making a push to GitHub, please highlight the more specifics of what you did in this document making a new section.*
 
+## Version 0.1b
+
+### Curve Approximator
+
+Redid some things and math and operations in the Curve Approximator to make it accurate. Yay!
+
+### CLI
+
+Added Curve Approximator option to the CLI.
+
 ## Version 0.1a
 
 ### Curve Approximator

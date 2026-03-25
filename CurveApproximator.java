@@ -7,14 +7,14 @@ public class CurveApproximator {
     private double[] interval;
     private ArrayList<Double[]> points;
     private double n;
-    private ArrayList<Double> endPoints;
 
     // ---------
     // Calculate
     // ---------
-    public double[] Calculate() {
+    public double[] Calculate(double n) {
+        try {
+        this.n = n;
         points = findPoints();
-        endPoints = new ArrayList<>();
         ArrayList<Double[]> leps = getLEPs();
         double lepAreas = 0;
         for (Double[] lep : leps) {
@@ -26,6 +26,11 @@ public class CurveApproximator {
             repAreas += rep[2];
         }
         return new double[]{lepAreas, repAreas, (lepAreas + repAreas) / 2};
+        }
+        catch (Exception e)
+        {
+            return new double[] {0};
+        }
     }
 
     // ----
@@ -39,7 +44,10 @@ public class CurveApproximator {
             double h = findHeight(i, "left");
             double area = b * h;
             leps.add(new Double[]{b, h, area});
-            Runner.debugText("Rectange #" + (i+1) + " Area: " + leps.get(i)[2]);
+            try {
+                Runner.debugText("Rectange #" + (i+1) + " Area: " + leps.get(i)[2]);
+            } catch (Exception e) {
+            }
         }
         return leps;
     }
@@ -55,7 +63,11 @@ public class CurveApproximator {
             double h = findHeight(i, "right");
             double area = b * h;
             reps.add(new Double[]{b, h, area});
-            Runner.debugText("Rectange #" + (i+1) + " Area: " + reps.get(i)[2]);
+            try {
+                Runner.debugText("Rectange #" + (i+1) + " Area: " + reps.get(i)[2]);
+            }
+            catch (Exception e) {
+            }
         }
         return reps;
     }
@@ -80,11 +92,11 @@ public class CurveApproximator {
     // Get f(x)
     // --------
     public double findHeight(int offset, String lr) {
-        Calculator c = new Calculator();
-        double x = lr.equals("left") ? points.get(offset)[0] : points.get(offset)[1];
-        String eq = replaceX(equation, x);
-        return c.Calculate(eq) / 2;
-    }
+    Calculator c = new Calculator();
+    double x = lr.equals("left") ? points.get(offset)[0] : points.get(offset)[1];
+    String eq = replaceX(equation, x);
+    return c.Calculate(eq);
+}
 
     // ------------------------
     // Replace "x" with a value
