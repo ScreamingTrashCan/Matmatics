@@ -22,7 +22,7 @@ public class CLI {
 
         System.out.println();
 
-        while (mainInput != 3) // Not the Exit function
+        while (mainInput != 5) // Not the Exit function
         {
             // ------------------
             // Start of interface
@@ -31,8 +31,9 @@ public class CLI {
             println("(1) Calculator", "default");
             println("(2) Base Translator", "default");
             println("(3) Curve Approximator", "default");
-            println("(4) Exit\n", "default");
-            mainInput = scanChoice(new ArrayList<>(Arrays.asList(1, 2, 3, 4))); // Takes in possible integer values
+            println("(4) Newtons Method", "default");
+            println("(5) Exit\n", "default");
+            mainInput = scanChoice(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5))); // Takes in possible integer values
             switch (mainInput) {
                 case 1:
                     // ----------
@@ -77,13 +78,14 @@ public class CLI {
                     BaseTranslator bT = new BaseTranslator();
                     input = 999;
 
+                    println("Welcome to the base translator interface! Choose an option:", "blue");
+                    println("(1) Calculate your inputs", "default");
+                    println("(2) Change input number and base", "default");
+                    println("(3) Change output base", "default");
+                    println("(4) Return to Main Menu\n", "default");
+
                     while (input != 4) {
-                        println("Welcome to the base translator interface! Choose an option:", "blue");
-                        println("(1) Calculate your inputs", "default");
-                        println("(2) Change input number and base", "default");
-                        println("(3) Change output base", "default");
-                        println("(4) Return to Main Menu\n", "default");
-                        println("\nChoose an option:\n", "default");
+                        println("Choose an option:\n", "default");
                         input = scanChoice(new ArrayList<>(Arrays.asList(1, 2, 3, 4)));
 
                         switch (input) {
@@ -110,9 +112,9 @@ public class CLI {
                                 }
                                 break;
                             case 2: // Set Inputs
-                                println("Please input your input number:\n", "default");
+                                println("Please input your input number:\n", "blue");
                                 bT.setInput(scanner.nextLine());
-                                println("\nPlease input your input base:\n", "default");
+                                println("\nPlease input your input base:\n", "blue");
                                 try {
                                     bT.setInBase(Integer.parseInt(scanner.nextLine()));
                                     System.out.println();
@@ -121,7 +123,7 @@ public class CLI {
                                 }
                                 break;
                             case 3: // Set Outbase
-                                println("Please input your output's base:\n", "default");
+                                println("Please input your output's base:\n", "blue");
                                 try {
                                     bT.setOutBase(Integer.parseInt(scanner.nextLine()));
                                     System.out.println();
@@ -141,18 +143,20 @@ public class CLI {
                     CurveApproximator ca = new CurveApproximator();
                     input = 999;
 
+                    println("Welcome to the curve approximator interface! Choose an option:", "blue");
+                    println("(1) Calculate your inputs", "default");
+                    println("(2) Set the equation", "default");
+                    println("(3) Set the interval", "default");
+                    println("(4) Return to the Main Menu\n", "default");
+
                     while (input != 4) {
-                        println("Welcome to the curve approximator interface! Choose an option:", "blue");
-                        println("(1) Calculate your inputs", "default");
-                        println("(2) Set the equation", "default");
-                        println("(3) Set the interval", "default");
-                        println("(4) Return to the Main Menu\n", "default");
+                        println("Choose an option:\n", "default");
                         input = scanChoice(new ArrayList<>(Arrays.asList(1, 2, 3, 4)));
 
                         switch (input) {
                             case 1: // Calculate
                                 int n = 0;
-                                println("\nHow many rectangles would you like to use?", "default");
+                                println("\nHow many rectangles would you like to use?\n", "blue");
                                 try {
                                     n = Integer.parseInt(scanner.nextLine());
                                 } catch (Exception e) {
@@ -160,25 +164,25 @@ public class CLI {
                                 }
                                 double[] endPoints = ca.Calculate(n);
                                 try {
-                                    println("LEPs: " + endPoints[0], "default");
+                                    println("\nLEPs: " + endPoints[0], "default");
                                     println("REPs: " + endPoints[1], "default");
                                     println("MEPs: " + endPoints[2] + "\n", "default");
                                 } catch (Exception e) {
                                 }
                                 break;
                             case 2: // Set Equation
-                                println("\nPlease input an equation:", "default");
+                                println("\nPlease input an equation:\n", "blue");
                                 ca.setEquation(scanner.nextLine());
                                 break;
                             case 3: // Set Interval
                                 int l = 0;
                                 int r = 0;
-                                println("\nWhat is the starting point?", "default");
+                                println("\nWhat is the starting point?\n", "blue");
                                 try {
                                     l = Integer.parseInt(scanner.nextLine());
                                 } catch (Exception e) {
                                 }
-                                println("\nWhat is the ending point?", "default");
+                                println("\nWhat is the ending point?\n", "blue");
                                 try {
                                     r = Integer.parseInt(scanner.nextLine());
                                 } catch (Exception e) {
@@ -190,7 +194,50 @@ public class CLI {
                         }
                     }
                     break;
-                case 4: // Exit
+                case 4:
+                    // ---------------
+                    // Newton's Method
+                    // ---------------
+                    NewtonsMethod nm = new NewtonsMethod();
+                    input = 999;
+
+                    println("Welcome to the newtons method interface! Choose an option:", "blue");
+                    println("(1) Calculate your inputs", "default");
+                    println("(2) Set the equations", "default");
+                    println("(3) Return to the Main Menu", "default");
+
+                    while (input != 3) {
+                        println("\nChoose an option:\n", "default");
+                        input = scanChoice(new ArrayList<>(Arrays.asList(1, 2, 3)));
+                        switch (input) {
+                            case 1: // Calculate
+                                double initial = 0;
+                                int iterations = 0;
+                                println("\nWhat is your initial guess?\n", "blue");
+                                try {
+                                    initial = Integer.parseInt(scanner.nextLine());
+                                } catch (Exception e) {
+                                }
+                                println("\nHow many iterations would you like to do?\n", "blue");
+                                try {
+                                    iterations = Integer.parseInt(scanner.nextLine());
+                                } catch (Exception e) {
+                                }
+                                println("\nAnswer: " + nm.Calculate(initial, iterations), "default");
+                                break;
+                            case 2: // Set Equations
+                                println("What is the original equation?\n", "blue");
+                                nm.setOriginal(scanner.nextLine());
+                                println("\nWhat is the derivative?\n", "blue");
+                                nm.setDerivative(scanner.nextLine());
+                                break;
+                            case 3: // Exit
+                                break;
+                        }
+                    }
+
+                    break;
+                case 5: // Exit
                     println("Goodbye!\n", "purple");
                     System.exit(0);
                     break;

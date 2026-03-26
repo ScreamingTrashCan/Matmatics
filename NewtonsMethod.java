@@ -15,31 +15,26 @@ public class NewtonsMethod {
     // -----------------------
     // Public Calculate Method
     // -----------------------
-    public Double Calculate(String original, String derivative, double initial, int iterations) {
+    public Double Calculate(double initial, int iterations) {
         guesses = new ArrayList<>();
         guesses.add(initial);
-        this.original = original;
-        this.derivative = derivative;
         Runner.debugText("Using Newtons Method with\nOriginal: " + this.original + "\nDerivative: " + this.derivative);
         for (int i = 0; i < iterations; i++) {
             guesses.add(method());
         }
         try {
-            if(guesses.get(guesses.size() -1) == null) {
+            if (guesses.get(guesses.size() - 1) == null) {
                 System.out.println("Numbers got too small/large!");
-            Runner.statusError();
-            return Double.NaN;
-            }   
-            else {
-                return guesses.get(guesses.size() - 1);  
+                Runner.statusError();
+                return Double.NaN;
+            } else {
+                return guesses.get(guesses.size() - 1);
             }
         } catch (NullPointerException e) {
-            System.out.println("Numbers got too small/large!");
+            System.out.println("\nNumbers got too small/large or long!");
             Runner.statusError();
             return Double.NaN;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             Runner.debugText("Ran into an unknown error!");
             Runner.statusFatalError();
             return Double.NaN;
@@ -119,6 +114,25 @@ public class NewtonsMethod {
             Runner.statusError();
             return null;
         }
+    }
+
+    // ---------------
+    // Getter & Setter
+    // ---------------
+    public String original() {
+        return original;
+    }
+
+    public String derivative() {
+        return derivative;
+    }
+
+    public void setOriginal(String original) {
+        this.original = original;
+    }
+
+    public void setDerivative(String derivative) {
+        this.derivative = derivative;
     }
 
     @Override

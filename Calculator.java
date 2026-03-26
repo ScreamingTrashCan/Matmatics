@@ -261,7 +261,7 @@ public class Calculator {
                 return i;
             }
         }
-        return 999;
+        return -1;
     }
 
     // ----------

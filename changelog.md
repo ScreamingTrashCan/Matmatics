@@ -1,6 +1,20 @@
 # Change Log
 *Whenever making a push to GitHub, please highlight the more specifics of what you did in this document making a new section.*
 
+## Version 0.1c
+
+### CLI
+
+Cleaned up some spacing and coloring in the CLI to make it more consistent. Also added Newton's Method functionality to the CLI.
+
+### Calculator
+
+Made one very small change to Calculator just to make it a bit more accurate; Find At now returns -1 instead of 999 if it can't find something.
+
+### Newton's Method
+
+Changed the Calculate() function to no longer take in Original and Derivative, and now they are instead set through separate getter/setter functions.
+
 ## Version 0.1b
 
 ### Curve Approximator
