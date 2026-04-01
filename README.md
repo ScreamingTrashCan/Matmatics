@@ -14,7 +14,7 @@ In the future, the program may or may not include in-depth tutorials and explana
 The program should only need Java installed. It was programmed in Version *"24.0.1" 2025-04-15*. Earlier versions are unknown whether they would work or not.
 
 ### Installing
-Download all files provided (Except for the README.md) and install them into one folder.
+Download all files provided (Except for the README.md and changelog.md) and install them into one folder.
 
 ### Executing Program
 Install all files within one folder, then use the built-in Run tool in Visual Studio and execute the *Runner.java* file.
