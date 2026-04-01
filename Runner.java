@@ -22,7 +22,8 @@ public class Runner {
         }
         
 
-        CLI cli = new CLI();
+        //CLI cli = new CLI();
+        MainMenuGUI menu = new MainMenuGUI();
     }
 
     // -------

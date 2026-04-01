@@ -1,6 +1,12 @@
 # Change Log
 *Whenever making a push to GitHub, please highlight the more specifics of what you did in this document making a new section.*
 
+## Version 0.2a
+
+### MainMenuGUI
+
+Added a new MainMenuGUI JFrame that sets up the base for the Matmatics GUI. Contains no functionality other than appearance for now.
+
 ## Version 0.1c
 
 ### CLI
