@@ -1,5 +1,8 @@
+import java.awt.Dimension;
+import java.awt.Image;
 
-
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 
 public class Runner {
 
@@ -23,7 +26,21 @@ public class Runner {
         
 
         //CLI cli = new CLI();
-        MainMenuGUI menu = new MainMenuGUI();
+
+        JFrame frame = new JFrame("Matmatics");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frame.setUndecorated(false);
+        frame.setSize(new Dimension(1920, 1080));
+
+        ImageIcon icon = new ImageIcon("Media/Matti/Matti_Idle.png");
+        Image iconImage = icon.getImage();
+        frame.setIconImage(iconImage);
+
+        MainMenuGUI panel = new MainMenuGUI();
+        frame.getContentPane().add(panel);
+
+        frame.setVisible(true);
     }
 
     // -------
