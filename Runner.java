@@ -25,8 +25,9 @@ public class Runner {
         }
         
 
-        //CLI cli = new CLI();
+        CLI cli = new CLI();
 
+        /*
         JFrame frame = new JFrame("Matmatics");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -41,6 +42,7 @@ public class Runner {
         frame.getContentPane().add(panel);
 
         frame.setVisible(true);
+        */
     }
 
     // -------
